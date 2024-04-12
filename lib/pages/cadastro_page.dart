@@ -77,6 +77,7 @@ class CadastroPage extends StatelessWidget {
               
               CustomButton(
                 onTap: efetuarCadastro,
+                textoBotao: 'Cadastrar',
               ),
               const SizedBox(height: 10),
               CustomButton(
