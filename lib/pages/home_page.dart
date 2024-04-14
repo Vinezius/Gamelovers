@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gamelovers/models/game.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:swipe_cards/draggable_card.dart';
 import 'package:swipe_cards/swipe_cards.dart';
@@ -16,52 +17,64 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
  late MatchEngine _matchEngine;
-  
+ List<SwipeItem> _swipeItems = <SwipeItem>[];
  int currentPicture = 0;
  int numberPictures = 2;
 
-  List<SwipeItem> items = [
-    SwipeItem(
-      content: "Hollow Knight",
-      likeAction: () {
-        print("Like");
-      },
-      nopeAction: () {
-        print("Nope");
-      },
-      onSlideUpdate: (SlideRegion? region) async {
-        print("Region $region");
-      }
-    ),
-    SwipeItem(
-      content: "The Legend of Zelda: Ocarina of Time",
-      likeAction: () {
-        print("Like");
-      },
-      nopeAction: () {
-        print("Nope");
-      },
-      onSlideUpdate: (SlideRegion? region) async {
-        print("Region $region");
-      }
-    ),
-    SwipeItem(
-      content: "Gris",
-      likeAction: () {
-        print("Like");
-      },
-      nopeAction: () {
-        print("Nope");
-      },
-      onSlideUpdate: (SlideRegion? region) async {
-        print("Region $region");
-      }
-    ),
+  List<Game> items = [
+      Game(
+        name: "Hollow Knight", 
+        release: 2017, 
+        description: "Hollow Knight is a 2017 action-adventure game developed and published by Team Cherry, and was released for Microsoft Windows, macOS, and Linux in 2017, and later for the Nintendo Switch, PlayStation 4, and Xbox One in 2018.", 
+        genre: ["Action", "Adventure", "Indie"], 
+        image: "assets/hollow_knight.png"
+        ),
+      Game(
+        name: "Gris", 
+        release: 2018, 
+        description: "Gris is a 2018 platform-adventure game by Spanish indie developer Nomada Studio and published by Devolver Digital. The game was released for Nintendo Switch, macOS, and Microsoft Windows in December 2018, for iOS in August 2019, for PlayStation 4 in November 2019, and for Android in April 2020.",
+        genre: ["Adventure", "Indie"], 
+        image: "assets/gris.png"
+        ),
+      Game(
+        name: "Celeste", 
+        release: 2018, 
+        description: "Celeste is a platforming video game by Canadian video game developers Maddy Makes Games, which was released in January 2018. The game was originally developed as a prototype in four days at a game jam, and later expanded into a full release.",
+        genre: ["Platform", "Indie"], 
+        image: "assets/celeste.png"
+        ),
+      Game(
+        name: "Outer Wilds", 
+        release: 2019, 
+        description: "Outer Wilds is a 2019 action-adventure game developed by Mobius Digital and published by Annapurna Interactive for Microsoft Windows, Xbox One, and PlayStation 4. The game features the player character exploring a solar system stuck in a 22-minute time loop, which ends as the sun goes supernova.", 
+        genre: ["Action", "Adventure", "Indie"], 
+        image: "assets/outer_wilds.jpg"
+        ),
   ];
 
   @override
-  void initState () {
-    _matchEngine = MatchEngine(swipeItems: items);
+  void initState() {
+    for (int i = 0; i < items.length; i++) {
+      _swipeItems.add(SwipeItem(
+          content: Game(name: items[i].name, release: items[i].release, description: items[i].description, genre: items[i].genre, image: items[i].image),
+          likeAction: () {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text("Curtiu ${items[i].name}"),
+              duration: Duration(milliseconds: 500),
+            ));
+          },
+          nopeAction: () {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text("Você não curtiu ${items[i].name}"),
+              duration: Duration(milliseconds: 500),
+            ));
+          },
+          onSlideUpdate: (SlideRegion? region) async {
+            print("Region $region");
+          }));
+    }
+
+    _matchEngine = MatchEngine(swipeItems: _swipeItems);
     super.initState();
   }
 
@@ -99,7 +112,7 @@ class _HomePageState extends State<HomePage> {
         matchEngine: _matchEngine, 
         onStackFinished: () {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Stack Finished'), 
+            content: Text('Sem mais jogos para curtir!'), 
             duration: Duration(milliseconds: 500),
           )
           );
@@ -117,9 +130,9 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        image: const DecorationImage(
+                        image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage("assets/hollow_knight.png"),
+                          image: AssetImage(items[i].image),
                         )
                       )
                     ),
@@ -213,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                                 Row(
                                   children: [
                                     Text(
-                                      items[i].content,
+                                      items[i].name,
                                       style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -255,7 +268,7 @@ class _HomePageState extends State<HomePage> {
                                     child: const Center(
                                       child: Padding(
                                         padding: EdgeInsets.all(8),
-                                        child: Icon(Icons.not_interested, color: Color.fromARGB(255, 255, 0, 0),),
+                                        child: Image(image: AssetImage("assets/dislike.png")),
                                       ),
                                     ),
                                   ),
@@ -281,7 +294,7 @@ class _HomePageState extends State<HomePage> {
                                     child: const Center(
                                       child: Padding(
                                         padding: EdgeInsets.all(8),
-                                        child: Icon(Icons.heart_broken_rounded, color: Colors.purple,),
+                                        child: Image(image: AssetImage("assets/undertale_heart.png")),
                                       ),
                                     ),
                                   ),
