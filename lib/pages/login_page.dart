@@ -3,16 +3,17 @@ import 'package:gamelovers/helpers/validar_email.dart';
 import 'package:gamelovers/pages/cadastro_page.dart';
 import 'package:gamelovers/pages/components/button.dart';
 import 'package:gamelovers/pages/components/text_field.dart';
+import 'package:gamelovers/pages/games_page.dart';
+import 'package:gamelovers/pages/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   final emailController = TextEditingController();
   final senhaController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  void efetuarLogin(){
+  bool efetuarLogin(){
 
-    _formKey.currentState!.validate();
-
+    return _formKey.currentState!.validate();
   }
 
   @override
@@ -71,9 +72,18 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 25),
               
-              CustomButton(
-                onTap: efetuarLogin,
-              ),
+                CustomButton(
+                onTap: () {
+                  bool resultValidation = efetuarLogin();
+                  if(resultValidation)
+                  {
+                    Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
+                  }
+                },
+                ),
               const SizedBox(height: 10),
               CustomButton(
                 onTap: () {
