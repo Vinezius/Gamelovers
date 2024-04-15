@@ -1,16 +1,33 @@
-# gamelovers
+# Gamelovers
 
-A new Flutter project.
+Projeto em Flutter desenvolvido para a matéria de Desenvolvimento Mobile ministrada pelo professor Diego Antunes.
 
-## Getting Started
+## Configuração inicial
 
-This project is a starting point for a Flutter application.
+* Rodar os seguintes comandos no terminal:
+    ```
+        flutter upgrade
+        flutter create .
+        flutter pub get
+    ```
+## O que foi desenvolvido e por quem
+### Entrega 1
+* Páginas de cadastro e Login(Vinícius Alves)
+* Validação dos formulários(Vinícius Alves)
+* Feedbacks ao usuário(Rafael Alonzo e Vinícius Alves)
+* Código padronizado(Equipe)
+* Navegação entre páginas(Equipe)
+* Tratamento de variáveis(Equipe)
+* Página de "Escolha" para os jogos, onde são mostrados com a possibilidade do usuario curtir ou não (Rafael Alonzo)
+* Mock dos jogos para listagem (Rafael Alonzo e Vinícius Alves)
+* Página de perfil (Gabriel Shibata)
+* Transição entre as páginas de perfil e escolha dos jogos(Gabriel Shibata)
 
-A few resources to get you started if this is your first Flutter project:
+## O que está faltando?
+### Entrega 1
+* Alteração do perfil
+* Detalhes de cada jogo
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Bugs Conhecidos
+### Entrega 1
+* Sem bugs conhecidos.
