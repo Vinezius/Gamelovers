@@ -2,6 +2,11 @@
 
 Projeto em Flutter desenvolvido para a matéria de Desenvolvimento Mobile ministrada pelo professor Diego Antunes.
 
+# Integrantes da equipe:
+* Gabriel Jun Shibata
+* Rafael Alonzo de Oliveira
+* Vinícius de Souza Alves
+
 ## Configuração inicial
 
 * Rodar os seguintes comandos no terminal:
