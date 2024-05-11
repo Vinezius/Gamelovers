@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "656567245169",
+    "project_id": "gamelovers-e2abd",
+    "storage_bucket": "gamelovers-e2abd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656567245169:android:7ee2530af0fdd30131bed0",
+        "android_client_info": {
+          "package_name": "com.example.gamelovers"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUNAe6pFsUlRg8HC4pr5nSpPrTed9vM60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
