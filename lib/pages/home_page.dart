@@ -29,13 +29,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: pc,
-        children: [
+        onPageChanged: setPaginaAtual,
+        children: const [
           GamesPage(),
           ProfilePage(),
         ],
-        onPageChanged: setPaginaAtual,
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color.fromARGB(255, 44, 44, 44),
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         onTap: (pagina) {
           pc.animateToPage(
             pagina,
-            duration: Duration(milliseconds: 400),
+            duration: const Duration(milliseconds: 400),
             curve: Curves.ease,
           );
         },

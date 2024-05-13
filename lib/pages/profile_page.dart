@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:gamelovers/models/games_user.dart';
+import 'package:gamelovers/pages/components/button.dart';
+import 'package:gamelovers/pages/edit_page.dart';
+import 'package:gamelovers/pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -10,6 +14,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final _firebaseAuth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,10 +71,10 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
           ),
-          Padding(
-              padding: const EdgeInsets.all(8.0),
+          const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
-                "Rafael de Souza",
+                user.name,
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 20,
@@ -80,15 +86,16 @@ class _ProfilePageState extends State<ProfilePage> {
               height: 380,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                  color: Colors.black, borderRadius: BorderRadius.circular(20)),
-              child: Column(children: [
+                  color: const Color.fromARGB(255, 59, 51, 51),
+                  borderRadius: BorderRadius.circular(20)),
+              child: const Column(children: [
                 ListTile(
                   title: Text(
                     "Nome",
                     style: TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                   subtitle: Text(
-                    "Rafael de Souza",
+                    User.name;
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
@@ -97,11 +104,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 ListTile(
                   title: Text(
-                    "Trabalha Onde",
+                    "Like jogos",
                     style: TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                   subtitle: Text(
-                    "Empresa Gamelovers",
+                    var list = 
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
@@ -137,23 +144,46 @@ class _ProfilePageState extends State<ProfilePage> {
               ]),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 40,
-              width: 150,
-              color: Colors.amber,
-              child: Center(
-                child: Text("Editar BIO",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold)),
-              ),
-            ),
-          )
+          CustomButton(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            },
+            textoBotao: 'Sair',
+          ),
+          CustomButton(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const EditPage()),
+              );
+            },
+            textoBotao: 'Editar BIO',
+          ),
         ],
       )),
     );
   }
+
+  sair() async {
+    await _firebaseAuth.signOut().then(
+          (user) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginPage(),
+            ),
+          ),
+        );
+  }
+
+  jogosLike
+  for 
+                    if(games_user.review=true){
+                      game_user.id == game.id
+                      list[] game.name
+                    }
+
+  return list
 }

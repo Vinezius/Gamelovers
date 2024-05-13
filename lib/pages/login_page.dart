@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:gamelovers/helpers/validar_email.dart';
 import 'package:gamelovers/pages/cadastro_page.dart';
@@ -57,58 +59,59 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 const Text(
                   'Seja bem vindo ao Gamelovers!',
-                  style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w900),
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900),
                 ),
                 const SizedBox(height: 25),
-
                 CustomTextField(
-                  controller: emailController, 
-                  hintText: 'E-mail', 
+                  controller: emailController,
+                  hintText: 'E-mail',
                   obscureText: false,
                   validator: (value) {
                     return validateEmail(value);
                   },
-                ), 
-
+                ),
                 const SizedBox(height: 20),
-
                 CustomTextField(
-                  controller: senhaController, 
-                  hintText: 'Senha', 
+                  controller: senhaController,
+                  hintText: 'Senha',
                   obscureText: true,
                   validator: (senha) {
-                    if(senha!.isEmpty) {
+                    if (senha!.isEmpty) {
                       return 'Insira uma senha';
-                    } else if(senha.length < 6) {
+                    } else if (senha.length < 6) {
                       return 'A senha deve ter no mínimo 6 caracteres';
                     }
                     return null;
                   },
                 ),
-
                 const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text('Esqueceu a senha?', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                    ],
-                  )
-                ),
-                if(errorMessage != null)
+                    padding: EdgeInsets.symmetric(horizontal: 25),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text('Esqueceu a senha?',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                      ],
+                    )),
+                if (errorMessage != null)
                   Text(
                     errorMessage!,
                     style: const TextStyle(color: Colors.red),
                   ),
                 const SizedBox(height: 25),
-                
                 CustomButton(
                   onTap: () async {
                     bool resultValidation = await efetuarLogin();
-                    if(resultValidation) {
+                    if (resultValidation) {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => const HomePage()),
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
                       );
                     }
                   },
@@ -118,7 +121,8 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => CadastroPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const CadastroPage()),
                     );
                   },
                   textoBotao: 'Criar conta',

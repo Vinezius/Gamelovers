@@ -1,12 +1,15 @@
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:gamelovers/helpers/validar_email.dart';
 import 'package:gamelovers/pages/components/button.dart';
 import 'package:gamelovers/pages/components/text_field.dart';
 import 'package:gamelovers/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:gamelovers/auth.dart';
 
 class CadastroPage extends StatefulWidget {
+  const CadastroPage({super.key});
+
   @override
   _CadastroPageState createState() => _CadastroPageState();
 }
@@ -35,8 +38,8 @@ class _CadastroPageState extends State<CadastroPage> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text('Senha Fraca'),
-                  content: Text('A senha fornecida é muito fraca.'),
+                  title: const Text('Senha Fraca'),
+                  content: const Text('A senha fornecida é muito fraca.'),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
@@ -54,7 +57,8 @@ class _CadastroPageState extends State<CadastroPage> {
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: const Text('Email Já Em Uso'),
-                  content: const Text('O email fornecido já está em uso por outra conta.'),
+                  content: const Text(
+                      'O email fornecido já está em uso por outra conta.'),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
@@ -85,7 +89,10 @@ class _CadastroPageState extends State<CadastroPage> {
               children: [
                 const Text(
                   'Faça seu cadastro!',
-                  style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w900),
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900),
                 ),
                 const SizedBox(height: 25),
                 CustomTextField(
@@ -132,7 +139,8 @@ class _CadastroPageState extends State<CadastroPage> {
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => const LoginPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()),
                     );
                   },
                   textoBotao: 'Voltar para o login',
