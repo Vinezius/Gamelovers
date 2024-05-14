@@ -10,6 +10,6 @@ class Game{
     required this.release,
     required this.description,
     required this.genre,
-    required this.image
+    required this.image,
   });
 }

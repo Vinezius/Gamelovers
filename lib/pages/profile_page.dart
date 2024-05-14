@@ -4,7 +4,9 @@ import 'package:gamelovers/models/games_user.dart';
 import 'package:gamelovers/pages/components/button.dart';
 import 'package:gamelovers/pages/edit_page.dart';
 import 'package:gamelovers/pages/login_page.dart';
+import 'package:gamelovers/pages/repository/user_repository.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -18,6 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<UserRepository>().getMe();
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 44, 44, 44),
       appBar: AppBar(
@@ -74,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
           const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                user.name,
+                'teste',
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 20,
@@ -95,7 +98,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     style: TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                   subtitle: Text(
-                    User.name;
+                    'teste',
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
@@ -108,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     style: TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                   subtitle: Text(
-                    var list = 
+                    'teste',
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
@@ -177,13 +180,4 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         );
   }
-
-  jogosLike
-  for 
-                    if(games_user.review=true){
-                      game_user.id == game.id
-                      list[] game.name
-                    }
-
-  return list
 }
