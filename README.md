@@ -36,3 +36,20 @@ Projeto em Flutter desenvolvido para a matéria de Desenvolvimento Mobile minist
 ## Bugs Conhecidos
 ### Entrega 1
 * Sem bugs conhecidos.
+
+### Entrega 2
+* Configuração do firebase (Vinícius Alves)
+* Conexão com o banco para Login e cadastro de usuário(Vinícius Alves). 
+* Validação para manter o login mesmo após o usuário fechar o app(Vinícius Alves)
+* Edição de perfil(Gabriel Shibata)
+* Listagem de jogos curtidos pelo usuário(Gabriel Shibata)
+* Fluxo de Curtir/descurtir jogos integrado ao Firebase(Rafael Alonzo)
+* Melhoras de UI(Equipe)
+
+## O que está faltando?
+### Entrega 2
+* Detalhes de cada jogo
+
+## Bugs Conhecidos
+### Entrega 2
+* Sem bugs conhecidos.
