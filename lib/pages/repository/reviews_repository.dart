@@ -25,16 +25,18 @@ class ReviewsRepository extends ChangeNotifier {
     db = DBFirestore.get();
   }
 
-  readGames() async {
-    if(auth.currentUser != null && lista.isEmpty) {
-      final snapshot = await db.collection('users/${auth.currentUser!.uid}/reviews').get();
-      snapshot.docs.forEach((doc) {
+readGames() async {
+  if(auth.currentUser != null && lista.isEmpty) {
+    final snapshot = await db.collection('users/${auth.currentUser!.uid}/reviews').get();
+    snapshot.docs.forEach((doc) {
+      if (doc.data().containsKey('name')) { // Check if "name" exists
         Game game = GamesRepository.items.firstWhere((game) => game.name == doc.get('name'));
         lista.add(game);
         notifyListeners();
-      });
-    }
+      }
+    });
   }
+}
 
   saveGames(Game game) async {
     lista.add(game);
