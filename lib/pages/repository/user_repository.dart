@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gamelovers/models/user.dart';
 
@@ -32,12 +31,12 @@ class UserRepository {
       tmp["uId"] = result.id;
 
       return Users.fromMap(tmp);
+    } else {
+      var novouser = Users(uId: uId, name: "", description: "", years: 0);
+      await result.reference.set(novouser.toMap());
+
+      return novouser;
     }
-
-    var novouser = Users(uId: uId, name: "", description: "", years: 0);
-    await result.reference.set(novouser.toMap());
-
-    return novouser;
   }
 
   Future saveAll(Users user) async {

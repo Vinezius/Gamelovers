@@ -1,11 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gamelovers/auth.dart';
 import 'package:gamelovers/databases/db_firestore.dart';
 import 'package:gamelovers/models/game.dart';
 import 'package:gamelovers/pages/repository/games_repository.dart';
-import 'dart:collection';
 
 class ReviewsRepository extends ChangeNotifier {
   List<Game> lista = [];
@@ -25,24 +23,29 @@ class ReviewsRepository extends ChangeNotifier {
     db = DBFirestore.get();
   }
 
-readGames() async {
-  if(auth.currentUser != null && lista.isEmpty) {
-    final snapshot = await db.collection('users/${auth.currentUser!.uid}/reviews').get();
-    snapshot.docs.forEach((doc) {
-      if (doc.data().containsKey('name')) { // Check if "name" exists
-        Game game = GamesRepository.items.firstWhere((game) => game.name == doc.get('name'));
-        lista.add(game);
-        notifyListeners();
-      }
-    });
+  readGames() async {
+    if (auth.currentUser != null && lista.isEmpty) {
+      final snapshot =
+          await db.collection('users/${auth.currentUser!.uid}/reviews').get();
+      // ignore: avoid_function_literals_in_foreach_calls
+      snapshot.docs.forEach((doc) {
+        if (doc.data().containsKey('name')) {
+          // Check if "name" exists
+          Game game = GamesRepository.items
+              .firstWhere((game) => game.name == doc.get('name'));
+          lista.add(game);
+          notifyListeners();
+        }
+      });
+    }
   }
-}
 
   saveGames(Game game) async {
     lista.add(game);
-    await db.collection('users/${auth.currentUser!.uid}/reviews')
-    .doc(game.name)
-    .set({
+    await db
+        .collection('users/${auth.currentUser!.uid}/reviews')
+        .doc(game.name)
+        .set({
       'Name': game.name,
       'Description': game.description,
       'Genre': game.genre,
@@ -52,9 +55,11 @@ readGames() async {
   }
 
   remove(Game game) async {
-    await db.collection('users/${auth.currentUser!.uid}/reviews').doc(game.name).delete();
+    await db
+        .collection('users/${auth.currentUser!.uid}/reviews')
+        .doc(game.name)
+        .delete();
     lista.remove(game);
     notifyListeners();
   }
-
 }

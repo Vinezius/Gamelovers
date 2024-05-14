@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gamelovers/models/game.dart';
-import 'package:gamelovers/models/games_user.dart';
 import 'package:gamelovers/pages/repository/games_repository.dart';
 import 'package:gamelovers/pages/repository/reviews_repository.dart';
 import 'package:google_fonts/google_fonts.dart';

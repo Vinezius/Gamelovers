@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gamelovers/models/games_user.dart';
+import 'package:gamelovers/models/user.dart';
 import 'package:gamelovers/pages/components/button.dart';
 import 'package:gamelovers/pages/edit_page.dart';
 import 'package:gamelovers/pages/login_page.dart';
@@ -17,39 +19,54 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final _firebaseAuth = FirebaseAuth.instance;
+  final UserRepository userRepository = UserRepository();
+  Users? user;
+  Reviews? review;
+  final _formKey = GlobalKey<FormState>();
+  bool loading = true;
+
+  @override
+  void initState() {
+    userRepository.getMe().then((value) {
+      setState(() {
+        user = (value);
+        loading = false;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<UserRepository>().getMe();
+    context.read<UserRepository>().getMe();
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 44, 44, 44),
-      appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 44, 44, 44),
-          title: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Icon(
-                  Icons.videogame_asset_outlined,
-                  color: Colors.white,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  'Profile',
-                  style: GoogleFonts.roboto(
-                      textStyle: TextStyle(
-                    color: Colors.purple.shade300,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                  )),
-                ),
-              ],
-            ),
-          )),
-      body: SingleChildScrollView(
-          child: Column(
-        children: [
+        backgroundColor: const Color.fromARGB(255, 44, 44, 44),
+        appBar: AppBar(
+            backgroundColor: const Color.fromARGB(255, 44, 44, 44),
+            title: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.videogame_asset_outlined,
+                    color: Colors.white,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    'Profile',
+                    style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                      color: Colors.purple.shade300,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    )),
+                  ),
+                ],
+              ),
+            )),
+        body: SingleChildScrollView(
+            child: Column(children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Stack(
@@ -74,100 +91,75 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
           ),
-          const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'teste',
-                style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
-                    color: Colors.white),
-              )),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Container(
-              height: 380,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 59, 51, 51),
-                  borderRadius: BorderRadius.circular(20)),
-              child: const Column(children: [
-                ListTile(
-                  title: Text(
-                    "Nome",
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
-                  ),
-                  subtitle: Text(
-                    'teste',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ),
-                Divider(
-                  color: Colors.grey,
-                ),
-                ListTile(
-                  title: Text(
-                    "Like jogos",
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
-                  ),
-                  subtitle: Text(
-                    'teste',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ),
-                Divider(
-                  color: Colors.grey,
-                ),
-                ListTile(
-                  title: Text(
-                    "Idade",
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
-                  ),
-                  subtitle: Text(
-                    "20",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ),
-                Divider(
-                  color: Colors.grey,
-                ),
-                ListTile(
-                  title: Text(
-                    "Descrição",
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
-                  ),
-                  subtitle: Text(
-                    "Eu amo jogos de poderzinho",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ),
-                Divider(
-                  color: Colors.grey,
-                ),
-              ]),
-            ),
-          ),
-          CustomButton(
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginPage()),
-              );
-            },
-            textoBotao: 'Sair',
-          ),
-          CustomButton(
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const EditPage()),
-              );
-            },
-            textoBotao: 'Editar BIO',
-          ),
-        ],
-      )),
-    );
+          Column(children: [
+            Padding(
+                padding: const EdgeInsets.all(25),
+                child: Form(
+                    key: _formKey,
+                    child: Center(
+                      child: SingleChildScrollView(
+                          child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ListTile(
+                            title: const Text(
+                              "Nome",
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 14),
+                            ),
+                            subtitle: Text(
+                              user?.name ?? "Empty",
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 18),
+                            ),
+                          ),
+                          ListTile(
+                            title: const Text(
+                              "Idade",
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 14),
+                            ),
+                            subtitle: Text('${user?.years ?? "Empty"}',
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 18)),
+                          ),
+                          ListTile(
+                            title: const Text("Descrição",
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 14)),
+                            subtitle: Text(user?.description ?? "Empty",
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 18)),
+                          ),
+                          ListTile(
+                            title: const Text("Jogos Like",
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 14)),
+                            subtitle: Text("jogos",
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 18)),
+                          ),
+                          CustomButton(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const EditPage()),
+                              );
+                            },
+                            textoBotao: 'Editar BIO',
+                          ),
+                          CustomButton(
+                            onTap: () {
+                              sair();
+                            },
+                            textoBotao: 'Sair',
+                          ),
+                        ],
+                      )),
+                    )))
+          ])
+        ])));
   }
 
   sair() async {
