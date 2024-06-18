@@ -6,6 +6,7 @@ import 'package:gamelovers/models/user.dart';
 import 'package:gamelovers/pages/components/button.dart';
 import 'package:gamelovers/pages/edit_page.dart';
 import 'package:gamelovers/pages/login_page.dart';
+import 'package:gamelovers/pages/repository/reviews_repository.dart';
 import 'package:gamelovers/pages/repository/user_repository.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +40,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     context.read<UserRepository>().getMe();
+    final repository = context.read<ReviewsRepository>();
+    final games = repository.lista;
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 44, 44, 44),
         appBar: AppBar(
@@ -135,16 +138,21 @@ class _ProfilePageState extends State<ProfilePage> {
                             title: const Text("Jogos Like",
                                 style: TextStyle(
                                     color: Colors.grey, fontSize: 14)),
-                            subtitle: Text("jogos",
+                            subtitle: Text(
+                                games
+                                    .map((game) => game.name)
+                                    .toList()
+                                    .join(", "),
                                 style: const TextStyle(
                                     color: Colors.white, fontSize: 18)),
                           ),
                           CustomButton(
                             onTap: () {
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const EditPage()),
+                                    builder: (context) => const EditPage(),
+                                    fullscreenDialog: true),
                               );
                             },
                             textoBotao: 'Editar BIO',

@@ -29,14 +29,14 @@ class ReviewsRepository extends ChangeNotifier {
           await db.collection('users/${auth.currentUser!.uid}/reviews').get();
       // ignore: avoid_function_literals_in_foreach_calls
       snapshot.docs.forEach((doc) {
-        if (doc.data().containsKey('name')) {
-          // Check if "name" exists
-          Game game = GamesRepository.items
-              .firstWhere((game) => game.name == doc.get('name'));
-          lista.add(game);
-          notifyListeners();
-        }
+        //if (doc.data().containsKey('name')) {
+        // Check if "name" exists
+        Game game =
+            GamesRepository.items.firstWhere((game) => game.name == doc.id);
+        lista.add(game);
+        //}
       });
+      notifyListeners();
     }
   }
 

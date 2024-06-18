@@ -117,21 +117,17 @@ class _EditPageState extends State<EditPage> {
                             user!.years = textoYears!;
                             user!.description = textoDescription;
                             await userRepository.saveAll(user!);
-                            Navigator.pushReplacement(
+                            Navigator.pop(
                               // ignore: use_build_context_synchronously
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ProfilePage()),
                             );
                           },
                           textoBotao: "Salvar",
                         ),
                         CustomButton(
                           onTap: () {
-                            Navigator.pushReplacement(
+                            Navigator.pop(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ProfilePage()),
                             );
                           },
                           textoBotao: "Voltar",
