@@ -84,10 +84,17 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 Container(
                     padding: const EdgeInsets.only(top: 50),
-                    child: const CircleAvatar(
+                    child:  CircleAvatar(
                         backgroundColor: Colors.white,
                         radius: 60,
-                        child: CircleAvatar(
+                        child: user?.profileImageUrl != null
+                            ? CircleAvatar(
+                                backgroundImage:
+                                    NetworkImage(user!.profileImageUrl!),
+                                radius: 50,
+                              )
+                            :
+                        const CircleAvatar(
                           backgroundImage: AssetImage("assets/foto_perfil.png"),
                           radius: 50,
                         ))),
@@ -155,7 +162,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     fullscreenDialog: true),
                               );
                             },
-                            textoBotao: 'Editar BIO',
+                            textoBotao: 'Editar Perfil',
                           ),
                           CustomButton(
                             onTap: () {

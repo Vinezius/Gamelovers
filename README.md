@@ -42,13 +42,13 @@ Projeto em Flutter desenvolvido para a matéria de Desenvolvimento Mobile minist
 * Conexão com o banco para Login e cadastro de usuário(Vinícius Alves). 
 * Validação para manter o login mesmo após o usuário fechar o app(Vinícius Alves)
 * Edição de perfil(Gabriel Shibata)
-* Listagem de jogos curtidos pelo usuário(Gabriel Shibata)
 * Fluxo de Curtir/descurtir jogos integrado ao Firebase(Rafael Alonzo)
 * Melhoras de UI(Equipe)
 
 ## O que está faltando?
 ### Entrega 2
 * Detalhes de cada jogo
+* Listagem de jogos curtidos pelo usuário
 
 ## Bugs Conhecidos
 ### Entrega 2

@@ -5,10 +5,11 @@ import 'package:gamelovers/pages/repository/user_repository.dart';
 import 'package:gamelovers/widget_tree.dart';
 import 'package:gamelovers/pages/repository/reviews_repository.dart';
 import 'package:provider/provider.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
 runApp(
     MultiProvider(
       providers: [

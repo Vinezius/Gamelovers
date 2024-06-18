@@ -27,19 +27,19 @@ class UserRepository {
     var result = await db.collection("users").doc(uId).get();
 
     if (result.exists) {
-      Map tmp = result.data() as Map;
+      Map<String, dynamic> tmp = result.data() as Map<String, dynamic>;
       tmp["uId"] = result.id;
 
       return Users.fromMap(tmp);
     } else {
-      var novouser = Users(uId: uId, name: "", description: "", years: 0);
+      var novouser = Users(uId: uId, name: "", description: "", years: 0, profileImageUrl: ""); // Incluir o novo campo profileImageUrl
       await result.reference.set(novouser.toMap());
 
       return novouser;
     }
   }
 
-  Future saveAll(Users user) async {
+  Future<void> saveAll(Users user) async {
     if (user.uId == null) {
       await db.collection("users").add(user.toMap());
     } else {
