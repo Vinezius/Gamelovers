@@ -53,3 +53,15 @@ Projeto em Flutter desenvolvido para a matéria de Desenvolvimento Mobile minist
 ## Bugs Conhecidos
 ### Entrega 2
 * Sem bugs conhecidos.
+
+### Entrega 3
+* Configuração da utilização da câmera e galeria do celular(Vinícius Alves)
+* Listagem de jogos curtidos pelo usuário (Rafael Alonzo)
+
+## O que está faltando?
+### Entrega 3
+* Utilização da API
+
+## Bugs Conhecidos
+### Entrega 3
+* Sem bugs conhecidos.
